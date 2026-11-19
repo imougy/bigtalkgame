@@ -67,34 +67,88 @@ function createBubbles() {
     }
 }
 
-// Fetch questions from API with cache prevention
+// --- Questions come from the published Google Sheet (CSV), live-editable ---
+// Hala edits the Sheet; "Publish to web" serves this fixed CSV URL and the
+// site picks up changes automatically. The bundled data.json is a snapshot
+// FALLBACK so the game never breaks if the sheet is ever unreachable.
+const QUESTIONS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSDAXKkq_mhS3qNVCNygaRMWWifO4Zq9nPBwsmMTRJFat1ALAk79r_hxgKodxwq8ia-r8HSRGyPOBaP/pub?output=csv";
+
 async function fetchQuestions() {
+    const bust = `_=${new Date().getTime()}`;
+
+    // 1) Live data from the published sheet
     try {
-        // Create a unique URL with timestamp to prevent caching.
-        // data.json ships alongside the site (self-contained), so this is a
-        // same-origin relative path — no dependency on any other host.
-        const timestamp = new Date().getTime();
-        const url = `./data.json?_=${timestamp}`;
-        
-        // Simple fetch without custom headers that would trigger preflight requests
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        questions = data;
-        
-        // Populate language dropdown
+        const res = await fetch(`${QUESTIONS_CSV_URL}&${bust}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const parsed = csvToQuestions(await res.text());
+        if (!parsed.length) throw new Error('no rows parsed');
+        questions = parsed;
         populateLanguageDropdown();
-        
-        console.log(`Successfully loaded ${questions.length} questions`);
+        console.log(`Loaded ${questions.length} questions from the live sheet`);
+        return questions;
+    } catch (err) {
+        console.warn('Live sheet unavailable — using bundled data.json:', err);
+    }
+
+    // 2) Fallback: the snapshot shipped with the site
+    try {
+        const res = await fetch(`./data.json?${bust}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        questions = await res.json();
+        populateLanguageDropdown();
+        console.log(`Loaded ${questions.length} questions from data.json (fallback)`);
         return questions;
     } catch (error) {
         console.error('Error fetching questions:', error);
         return [];
     }
+}
+
+// Convert published-sheet CSV text into the same object shape as data.json
+// (adds a 1-based ID; coerces the Adult column to a real boolean).
+function csvToQuestions(text) {
+    const rows = parseCsv(text);
+    if (rows.length < 2) return [];
+    const headers = rows[0].map(h => h.trim());
+    const out = [];
+    for (let i = 1; i < rows.length; i++) {
+        const cells = rows[i];
+        if (cells.length === 1 && cells[0].trim() === '') continue; // blank line
+        const obj = { ID: out.length + 1 };
+        headers.forEach((h, j) => {
+            const raw = cells[j] !== undefined ? cells[j] : '';
+            obj[h] = (h === 'Adult') ? (String(raw).trim().toUpperCase() === 'TRUE') : raw;
+        });
+        if (obj.Question && String(obj.Question).trim() !== '') out.push(obj);
+    }
+    return out;
+}
+
+// RFC-4180 CSV parser: handles quoted fields, "" escapes, and commas or
+// newlines inside quotes. Returns an array of string arrays.
+function parseCsv(text) {
+    const rows = [];
+    let row = [], field = '', inQuotes = false;
+    text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+    for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        if (inQuotes) {
+            if (c === '"') {
+                if (text[i + 1] === '"') { field += '"'; i++; }
+                else inQuotes = false;
+            } else field += c;
+        } else if (c === '"') {
+            inQuotes = true;
+        } else if (c === ',') {
+            row.push(field); field = '';
+        } else if (c === '\n') {
+            row.push(field); rows.push(row); row = []; field = '';
+        } else {
+            field += c;
+        }
+    }
+    if (field !== '' || row.length) { row.push(field); rows.push(row); }
+    return rows;
 }
 
 // Populate language dropdown based on available translations
