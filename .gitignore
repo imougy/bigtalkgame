@@ -1,0 +1,25 @@
+# --- BigTalk: publish only the live game (index + its assets) ---
+# Everything below stays on your disk but is kept OUT of the public repo.
+
+# macOS
+.DS_Store
+
+# Orphan / experimental pages (not linked from index.html)
+login.html
+admin.html
+main.html
+play.html
+profile.html
+chatGPT.html
+claude.html
+deepseek.html
+qwen.html
+
+# Unused asset
+cat.svg
+
+# Source & proposal docs (private — never publish)
+*.key
+*.pages
+*.pdf
+prompt.txt

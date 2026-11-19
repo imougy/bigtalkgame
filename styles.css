@@ -1,0 +1,722 @@
+:root {
+    --primary-color: #4B2E83;    /* Purple from logo */
+    --secondary-color: #FFB81C;   /* Yellow/Orange from logo */
+    --background-color: #121212;  /* Keep dark background */
+    --card-color: #ffffff;        /* Keep white cards */
+    --text-color: #121212;        /* Keep dark text */
+    --button-color: #FFB81C;      /* Use yellow for primary buttons */
+    --button-text: #000000;       /* Black text on yellow buttons */
+    --modal-background: rgba(0, 0, 0, 0.8);    /* Background for modals */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--card-color);
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    margin: 0;
+    /* Removed touch-action: none and overflow: hidden to allow scrolling */
+}
+
+.container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+    /* Allow container to scroll if needed */
+    overflow-y: auto;
+}
+
+/* Bubble animation */
+.bubbles {
+    position: fixed; /* Fixed instead of absolute to stay in place while scrolling */
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none; /* Allow interaction with elements below */
+}
+
+.bubble {
+    position: absolute;
+    bottom: -20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: float 8s infinite ease-in;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-100vh) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Ultra-simple burger menu for iOS compatibility */
+.simple-burger {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    padding: 10px;
+}
+
+.burger-line {
+    width: 100%;
+    height: 4px;
+    background-color: var(--secondary-color);
+    margin: 3px 0;
+    border-radius: 2px;
+}
+
+/* Simple dropdown menu */
+.simple-dropdown {
+    position: fixed;
+    top: 75px;
+    right: 20px;
+    background-color: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    z-index: 9998;
+    overflow: hidden;
+    display: none;
+    width: 170px; /* Increased width to fit "Join Community" on one line */
+}
+
+.simple-option {
+    display: block;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.simple-option:last-child {
+    border-bottom: none;
+}
+
+.simple-option:active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Simple modal */
+.simple-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: none;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.modal-box {
+    background-color: white;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+}
+
+.modal-box h2 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.modal-content {
+    color: black;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 5px;
+}
+
+.modal-content p, 
+.modal-content li {
+    margin-bottom: 15px;
+}
+
+.modal-content ol, 
+.modal-content ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.close-modal {
+    display: block;
+    background-color: var(--secondary-color);
+    color: black;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Welcome Screen */
+.welcome-screen {
+    text-align: center;
+    max-width: 600px;
+    padding: 0 20px; /* Add horizontal padding */
+}
+
+.welcome-logo {
+    max-width: 240px;
+    width: 60%;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.welcome-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    padding: 0 15px; /* Additional padding for the text itself */
+}
+
+/* Settings Screen */
+.settings-screen {
+    display: none;
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    padding: 0 20px; /* Add horizontal padding */
+}
+
+.settings-screen h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--secondary-color);
+}
+
+.setting-item {
+    margin-bottom: 1.5rem;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px; /* Add some padding to setting items */
+}
+
+.setting-item label {
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+/* Game Screen */
+.game-screen {
+    display: none;
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Remove the game header since we'll move the logo to the card */
+.game-header {
+    display: none;
+}
+
+/* Card logo positioning at bottom left - updated to match speak button */
+.card-logo {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    width: 40px;
+    height: 40px;
+    opacity: 0.8;
+    object-fit: contain;
+}
+
+/* Adjust card padding to accommodate logo */
+.card {
+    background-color: var(--card-color);
+    color: var(--text-color);
+    border-radius: 16px;
+    padding: 40px 30px;
+    width: 95%;
+    max-width: 600px;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+/* RTL support for languages like Arabic and Farsi */
+.rtl {
+    direction: rtl;
+    text-align: right;
+}
+
+.question-text {
+    font-size: 2.2rem;
+    text-align: center;
+    line-height: 1.4;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    padding: 0 10px; /* Add padding to question text */
+}
+
+.speak-button {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(75, 46, 131, 0.1); /* Purple with opacity */
+    transition: background-color 0.3s ease;
+}
+
+.speak-button:hover {
+    background-color: rgba(75, 46, 131, 0.2);
+}
+
+/* Game buttons container - we hide this but keep the fixed buttons visible */
+.game-buttons {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    /* Important: Even if this container is hidden, the buttons themselves should stay visible */
+    position: relative;
+    z-index: 999;
+}
+
+/* Buttons */
+.btn {
+    padding: 15px 30px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    background-color: var(--button-color);
+    color: var(--button-text);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Make Next button floating */
+.btn-next {
+    background-color: var(--secondary-color);
+    color: var(--button-text);
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000; /* Much higher z-index to ensure visibility */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    /* Ensure minimum size regardless of screen dimensions */
+    min-width: 80px;
+    min-height: 44px; /* Apple's recommended minimum touch target size */
+    display: flex !important; /* Force display */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Make the Finish button subtle and positioned at top left */
+.btn-finish {
+    background-color: transparent;
+    color: var(--card-color);
+    box-shadow: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000; /* Much higher z-index to ensure visibility */
+    font-size: 1rem;
+    padding: 10px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    /* Ensure minimum size regardless of screen dimensions */
+    min-width: 60px;
+    min-height: 44px; /* Apple's recommended minimum touch target size */
+    display: flex !important; /* Force display */
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-finish:hover {
+    opacity: 1;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--secondary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Select Dropdown */
+.language-select {
+    width: auto;
+    min-width: 120px;
+    max-width: 200px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: white;
+    color: var(--text-color);
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23131313%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem top 50%;
+    background-size: 0.65rem auto;
+}
+
+/* Celebration animation */
+@keyframes celebrate {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.celebrate {
+    animation: celebrate 0.6s ease-in-out;
+}
+
+.logo-small {
+    max-width: 120px;
+    width: 40%;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+/* For proper scrolling on mobile */
+.modal-content {
+    -webkit-overflow-scroll-webkit-overflow-scrolling: touch;
+}
+
+/* Community options styling */
+.community-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.community-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.facebook-btn {
+    background-color: #1877F2;
+}
+
+.instagram-btn {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.community-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.social-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    fill: currentColor;
+}
+
+/* Adjust for landscape mode */
+@media (orientation: landscape) {
+    .container {
+        padding: 60px 20px 100px; /* Increased bottom padding for button visibility */
+    }
+    
+    .game-screen {
+        flex-direction: column;
+        min-height: 100vh;
+        padding-bottom: 80px; /* Ensure space at bottom for floating button */
+    }
+    
+    .card {
+        margin-bottom: 40px;
+        max-height: none; /* Remove height restriction */
+    }
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .welcome-screen, .settings-screen {
+        padding: 0 15px;
+    }
+    
+    .welcome-logo {
+        max-width: 180px;
+        width: 50%;
+    }
+    
+    .card {
+        padding: 35px 20px;
+    }
+    .question-text {
+        font-size: 1.8rem;
+    }
+    .btn {
+        padding: 14px 28px;
+        font-size: 1rem;
+    }
+    .card {
+        width: 92%;
+        padding: 35px 25px;
+        min-height: 340px;
+    }
+    .game-buttons {
+        width: 92%;
+        margin-top: 1.5rem;
+    }
+    .logo-small {
+        max-width: 100px;
+        width: 30%;
+    }
+    .card-logo {
+        width: 40px;
+        height: 40px;
+        bottom: 25px;
+        left: 25px;
+    }
+    .community-options {
+        gap: 10px;
+    }
+    
+    .community-btn {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Adjust button sizes for mobile landscape */
+@media (max-width: 896px) and (orientation: landscape) {
+    .btn-next {
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 20px; /* Slightly larger touch target */
+    }
+    
+    .btn-finish {
+        top: 15px;
+        left: 15px;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .container {
+        padding: 60px 15px 100px; /* Ensure padding in landscape mode */
+        flex-direction: column;
+        justify-content: flex-start; /* Start from top to ensure content is visible */
+        align-items: center;
+        width: 100%;
+    }
+    
+    .game-screen {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 15px;
+        padding-top: 50px; /* Space for the finish button */
+        padding-bottom: 80px; /* Space for the next button */
+    }
+    
+    .card {
+        min-height: 170px;
+        height: auto;
+        width: 90%; /* Wider card for better readability */
+        padding: 20px 25px 40px; /* Extra padding at bottom for logo */
+        margin: 0 0 20px 0; /* Add bottom margin */
+        display: flex;
+        align-items: center;
+    }
+    
+    .question-text {
+        font-size: 1.6rem;
+        margin-bottom: 0;
+        padding: 0 15px; /* Add some horizontal padding */
+    }
+    
+    /* Ensure buttons stay visible even if container is altered */
+    .game-buttons {
+        position: static;
+        height: 0;
+        min-height: 0;
+        overflow: visible; /* This ensures children (buttons) are visible */
+        margin: 0;
+        padding: 0;
+    }
+    
+    .speak-button {
+        bottom: 15px;
+        right: 15px;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 320px) {
+    .welcome-screen, .settings-screen {
+        padding: 0 10px;
+    }
+    
+    .welcome-text, .question-text {
+        padding: 0 5px;
+    }
+    
+    .btn-next {
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .btn-finish {
+        top: 10px;
+        left: 10px;
+    }
+    
+    .card-logo {
+        width: 36px;
+        height: 36px;
+        bottom: 20px;
+        left: 20px;
+    }
+    
+    .speak-button {
+        width: 36px;
+        height: 36px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .simple-dropdown {
+        width: 160px; /* Slightly narrower on very small screens */
+    }
+    
+    .simple-option {
+        padding: 12px 10px;
+        font-size: 0.9rem;
+    }
+}

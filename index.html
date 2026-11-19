@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>Big Talk Game</title>
+    <link rel="stylesheet" href="styles.css?v2">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JLLNL2KD3J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JLLNL2KD3J');
+</script>
+<body>
+    <!-- Bubble animation background -->
+    <div class="bubbles" id="bubbles"></div>
+    
+    <!-- Super Simple Burger Menu (iOS Compatible) -->
+    <div class="simple-burger" id="simple-burger">
+        <div class="burger-line"></div>
+        <div class="burger-line"></div>
+        <div class="burger-line"></div>
+    </div>
+    
+    <!-- Simple Dropdown Items -->
+    <div class="simple-dropdown" id="simple-dropdown">
+        <a href="#" class="simple-option" id="join-community-link">Join Community</a>
+        <a href="#" class="simple-option" id="how-to-play-link">How to Play</a>
+        <a href="#" class="simple-option" id="about-us-link">About Us</a>
+        <a href="mailto:bigtalkgame@gmail.com" class="simple-option" id="contact-us-link">Contact Us</a>
+    </div>
+    
+    <!-- Simple Modals -->
+    <div class="simple-modal" id="how-to-play-modal">
+        <div class="modal-box">
+            <h2>How to Play</h2>
+            <div class="modal-content">
+                <p>From the website bigtalkgame.com, select "Start Game". This will take you to the game settings where you may choose your preferred language and whether you're comfortable having questions of an adult nature. Less than 5% of the questions address adult subjects, so the game will NOT be exclusively about that.</p>
+                <p>One phone may be used and passed around, or multiple phones may be used. If more than one phone is used, you may see repeated questions. The questions will not repeat in the same game if you're using only 1 phone.</p>
+                <p>When it's your turn:</p>
+                <ol>
+                    <li>Draw a card by pressing "Next"</li>
+                    <li>Address the question (in person, not online) by answering it or expressing what the question brought up for you; thoughts, memories, feelings, judgements...etc. There's no right or wrong answer. If the question is vague, you get to interpret the question any way you want. "I don't want to answer because..." (fill in the blank) is a perfectly good response. Dare to be vulnerable and authentic. You'll be happily surprised! Questions are intended to be conversation openers. Others in the game may ask follow up questions or probe more into the subject. They are NOT to talk about themselves or take over the spotlight. You get to decide whether you want to receive follow up questions or not and may halt them at any time.</li>
+                    <li>If you absolutely do NOT want to answer or address your question, you may:
+                        <ul>
+                            <li>a) Pass by pressing "Next" to get a new question. You only get 1 chance to Pass (recommended).</li>
+                            <li>b) Gift your question to someone else in the group. When you gift your question, you lose your turn. The recipient gets an extra question, it does not affect their normal turn. Again, we recommend allowing this only one time per person per game.</li>
+                        </ul>
+                    </li>
+                    <li>Once you are complete with your turn and there are no further follow up questions for you, pass the phone to someone else. Now it's the next person's turn.</li>
+                </ol>
+                <p>When you're done, you may end the game by selecting "End Game".</p>
+                <p>Optional modification (suitable for small groups or romantic partners): Everyone answers the same question. Not recommended because it affects the quality of listening. Typically, we get busy thinking about our own response and we're not as present for the person talking.</p>
+                <p>You may join Big Talk Game communities on Facebook and Instagram by selecting "Join Community". It's a great way to connect with like minded people, receive tips and updates, suggest questions, share experiences and take the game to the next level, however that looks for you!</p>
+                <p>Enjoy Big Talk Game and send us your feedback, ideas and questions. If you don't see your language and would like to help us add it, please get in touch. We're constantly adding new questions and your input is welcome!</p>
+            </div>
+            <a href="#" class="close-modal" id="close-how-to-play">Close</a>
+        </div>
+    </div>
+    
+    <div class="simple-modal" id="about-us-modal">
+        <div class="modal-box">
+            <h2>About Us</h2>
+            <div class="modal-content">
+                <p>"Big Talk Game" helps you get to know yourself and the people in your life better. By providing conversation starters, it engages people at a deeper level and increases intimacy and authenticity in our relationships. Whether you're meeting for the first time or close family members, playing "Big Talk Game" is guaranteed to improve and strengthen your relationships.</p>
+                <p>It's fun to play at parties, social gatherings, dates or remotely to entertain and/or establish long lasting bonds. Each player draws a card (by pressing a button) and addresses the question or topic presented. Other players in the session ask follow up questions. There are no right or wrong answers. The questions are meant to get the conversation going. They are universal in nature yet very individual in practice.</p>
+                <p>"Big Talk Game" is the brainchild of Hala Fauzi <a href="http://UnconditionalLove.blog" target="_blank">UnconditionalLove.blog</a></p>
+                <p>Logo design by <a href="https://www.mikesamuelgraphics.com/" target="_blank">Mike Samuel</a></p>
+                <p>Farsi translation by Heeva Parsi</p>
+                <p>Spanish translation by <a href="https://www.instagram.com/brunocossentino" target="_blank">Bruno Cossentino</a></p>
+                <p>Greek translation by Evangelia Kagiali and Kostis Vidakis</p>
+                <p>Developed by <a href="https://www.cinnamonmobile.com" target="_blank">Cinnamon Mobile</a></p>
+            </div>
+            <a href="#" class="close-modal" id="close-about-us">Close</a>
+        </div>
+    </div>
+    
+    <!-- Join Community Modal -->
+    <div class="simple-modal" id="join-community-modal">
+        <div class="modal-box">
+            <h2>Join Our Community</h2>
+            <div class="modal-content">
+                <div class="community-options">
+                    <a href="https://m.facebook.com/groups/484964966392548" target="_blank" class="community-btn facebook-btn">
+                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/>
+                        </svg>
+                        Join Facebook Community
+                    </a>
+                    <a href="https://www.instagram.com/bigtalkgame" target="_blank" class="community-btn instagram-btn">
+                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+                        </svg>
+                        Join Instagram Community
+                    </a>
+                </div>
+            </div>
+            <a href="#" class="close-modal" id="close-join-community">Close</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Welcome Screen -->
+        <div class="welcome-screen" id="welcome-screen">
+            <img src="logo.png" alt="Big Talk Game" class="welcome-logo">
+            <p class="welcome-text">
+                Welcome to Big Talk Game, the social game that sparks meaningful conversations. Gather your friends in a circle, take turns answering thought-provoking questions, and get to know each other on a deeper level.
+                <br><br>Ready to play?
+            </p>
+            <button class="btn" id="welcome-start-btn">Start Game</button>
+        </div>
+
+        <!-- Settings Screen -->
+        <div class="settings-screen" id="settings-screen">
+            <img src="logo.png" alt="Big Talk Game" class="logo-small">
+            <h2>Game Settings</h2>
+            
+            <div class="setting-item">
+                <label for="adult-toggle">Questions of an adult nature</label>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="adult-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div class="setting-item">
+                <label for="read-toggle">Read Question for me</label>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="read-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div class="setting-item">
+                <label for="language-select">Language</label>
+                <select id="language-select" class="language-select">
+                    <option value="Question">English</option>
+                    <!-- Other languages will be added dynamically -->
+                </select>
+            </div>
+            
+            <button class="btn" id="settings-start-btn">Start Game</button>
+        </div>
+
+        <!-- Game Screen -->
+        <div class="game-screen" id="game-screen">
+            <div class="card" id="question-card">
+                <img src="logo.png" alt="" class="card-logo">
+                <p class="question-text" id="question-text"></p>
+                <button class="speak-button" id="speak-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M15.54 8.46C16.4774 9.39763 17.0039 10.6692 17.0039 11.995C17.0039 13.3208 16.4774 14.5924 15.54 15.53" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M18.07 5.93C19.9447 7.80528 20.9979 10.3473 20.9979 13C20.9979 15.6527 19.9447 18.1947 18.07 20.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="game-buttons">
+                <button class="btn btn-finish" id="finish-btn">End Game</button>
+                <button class="btn btn-next" id="next-btn">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js?v3"></script>
+</body>
+</html>
